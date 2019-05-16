@@ -44,8 +44,6 @@ GEM
     pg (1.1.4)
     public_suffix (3.0.2)
     rack (2.0.7)
-    rack-flash3 (1.0.5)
-      rack
     rack-protection (2.0.5)
       rack
     rack-test (1.0.0)
@@ -103,7 +101,6 @@ DEPENDENCIES
   coveralls
   database_cleaner
   pg
-  rack-flash3
   rake
   rspec
   shotgun
