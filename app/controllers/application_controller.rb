@@ -51,5 +51,21 @@ class ApplicationController < Sinatra::Base
     erb :login
   end
 
+  post '/login_user' do
+    email = params['user']['email']
+    password = params['user']['password']
+
+    user = User.find_by(email: email)
+    if user
+      if user.password == password
+        redirect '/', notice: 'User login was successful!'
+      else
+        redirect '/login', error: 'Wrong password!'
+      end
+    else
+      redirect '/login', error: 'User with that email does not exist!'
+    end
+  end
+
 end
 
