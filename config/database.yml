@@ -1,0 +1,21 @@
+development:
+    adapter: 'postgresql'
+    host: 'localhost'
+    database: <%= ENV['DEV_DATABASE'] %>
+    username: <%= ENV['USERNAME'] %>
+    password: <%= ENV['PASSWORD'] %>
+
+test:
+    adapter: 'postgresql'
+    host: 'localhost'
+    database: <%= ENV['TEST_DATABASE'] %>
+    username: <%= ENV['USERNAME'] %>
+    password: <%= ENV['PASSWORD'] %> ''
+
+production:
+  adapter: 'postgresql'
+  encoding: 'unicode'
+  host: <%= ENV['PRO_HOST'] %>
+  database: <%= ENV['PRO_DATABASE'] %>
+  username: <%= ENV['USERNAME'] %>
+  password: <%= ENV['PASSWORD'] %>
