@@ -3,8 +3,9 @@ require_relative '../../app/controllers/application_controller'
 
 RSpec.describe 'home' do
   it 'should display signup link if user has not logged in' do
-    visit '/'
+    visit '/logout'
 
+    expect(current_path).to eq('/')
     expect(page).to have_content('Register')
   end
   it 'should display logout link if user has logged in' do
@@ -17,7 +18,6 @@ RSpec.describe 'home' do
     click_on 'Submit'
 
     expect(current_path).to eq('/')
-    # TODO
-    # expect(page).to have_content('Logout')
+    expect(page).to have_content('Logout')
   end
 end
