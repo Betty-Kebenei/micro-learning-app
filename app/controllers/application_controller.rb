@@ -8,7 +8,7 @@ require 'uri'
 require_relative '../../app/models/user'
 
 class ApplicationController < Sinatra::Base
-  enable :sessions
+  use Rack::Session::Cookie
   register Sinatra::Flash
   helpers Sinatra::RedirectWithFlash
 
@@ -80,6 +80,11 @@ class ApplicationController < Sinatra::Base
     else
       redirect '/login', error: 'User with that email does not exist!'
     end
+  end
+
+  get '/logout' do
+    session.delete(:user_id)
+    redirect '/', notice: 'User logout was successful!'
   end
 
 end
