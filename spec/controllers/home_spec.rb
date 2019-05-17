@@ -19,5 +19,6 @@ RSpec.describe 'home' do
 
     expect(current_path).to eq('/')
     expect(page).to have_content('Logout')
+    expect(page).to have_content('Topic')
   end
 end
