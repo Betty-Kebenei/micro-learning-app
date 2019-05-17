@@ -12,6 +12,7 @@ gem 'sinatra-activerecord'
 gem 'pg'
 gem 'sinatra-flash'
 gem 'sinatra-redirect-with-flash'
+gem 'bcrypt'
 
 
 group :test do

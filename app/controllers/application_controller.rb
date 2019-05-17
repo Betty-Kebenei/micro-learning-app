@@ -17,6 +17,18 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'app/public'
   end
 
+  def logged_in?
+    if session[:user_id]
+      return true
+    end
+  end
+
+  def current_user
+    user_id = session[:user_id]
+    user = User.find_by(id: user_id)
+    return user
+  end
+
   get '/' do
     @current_user = session[:user_id]
     erb :home
@@ -59,7 +71,7 @@ class ApplicationController < Sinatra::Base
 
     user = User.find_by(email: email)
     if user
-      if user.password == password
+      if user.authenticate(password)
         session[:user_id] = user.id
         redirect '/', notice: 'User login was successful!'
       else
