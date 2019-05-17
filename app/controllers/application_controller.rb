@@ -18,6 +18,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
+    @current_user = session[:user_id]
     erb :home
   end
 
@@ -40,6 +41,7 @@ class ApplicationController < Sinatra::Base
         redirect '/register', error: error
       else
         user.save
+        session[:user_id] = user.id
         redirect '/', notice: 'User registration was successful!'
       end
     else
@@ -58,6 +60,7 @@ class ApplicationController < Sinatra::Base
     user = User.find_by(email: email)
     if user
       if user.password == password
+        session[:user_id] = user.id
         redirect '/', notice: 'User login was successful!'
       else
         redirect '/login', error: 'Wrong password!'

@@ -1,0 +1,23 @@
+header {
+    display: inline;
+    box-sizing: border-box;
+}
+
+header logo {
+    width: 60%;
+    float: left;
+}
+
+header buttons {
+    width: 40%;
+    float: right;
+}
+
+header a {
+    text-decoration: none;
+    padding: 0 30px;
+}
+
+div.home {
+    text-align: center;
+}
