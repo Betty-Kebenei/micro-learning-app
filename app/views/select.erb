@@ -1,12 +1,6 @@
-<% @select_articles.each do |article| %>
-  <br><br><br>
-  <div class="article_card">
-    <h2>Title</h2>
-    <h4><%= article.fetch('title') %></h4>
-    <h3>Description</h3>
-    <p><%= article.fetch('description') %></p>
-    <button type="button">
-      <a href="<%= article.fetch('url') %>">This is prefect</a>
-    </button>
-  </div>
-<% end %>
+<div>
+  <iframe
+    src="<%= @article.fetch('url') %>"
+    style="border:1px solid gray;height:90vh;width:70vw;;">
+  </iframe>
+</div>
