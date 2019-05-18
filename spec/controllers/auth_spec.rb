@@ -20,11 +20,19 @@ RSpec.describe 'authentication' do
         click_on 'Submit'
 
         expect(current_path).to eq('/')
+
+        #register can't be accessed when logged in
+
+        visit '/register'
+
+        expect(current_path).to eq('/')
+        expect(page).to have_no_content('Register to get started!')
       end
     end
 
     context 'when details are invalid' do
       it 'should not post a new user but redirect back to "/register"' do
+        visit '/logout'
         visit '/register'
 
         fill_in 'user[email]', with: 'test@test.com'
@@ -40,6 +48,7 @@ RSpec.describe 'authentication' do
 
   context 'login' do
     it 'should display a login form' do
+      visit '/logout'
       visit '/login'
 
       expect(page).to have_content('Login to get started!')
@@ -47,6 +56,7 @@ RSpec.describe 'authentication' do
 
     context 'when details are valid' do
       it 'should login the user and redirect to "/"' do
+
         visit '/register'
 
         fill_in 'user[email]', with: 'test@test.com'
@@ -55,6 +65,7 @@ RSpec.describe 'authentication' do
 
         click_on 'Submit'
 
+        visit '/logout'
         visit '/login'
 
         fill_in 'user[email]', with: 'test@test.com'
@@ -68,6 +79,7 @@ RSpec.describe 'authentication' do
 
     context 'when details are invalid' do
       it 'should not login the user but redirect back to "/login"' do
+        visit '/logout'
         visit '/register'
 
         fill_in 'user[email]', with: 'test@test.com'
@@ -76,6 +88,7 @@ RSpec.describe 'authentication' do
 
         click_on 'Submit'
 
+        visit '/logout'
         visit '/login'
 
         fill_in 'user[email]', with: 'test@test.com'

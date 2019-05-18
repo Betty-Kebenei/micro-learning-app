@@ -3,6 +3,7 @@ require_relative '../../app/controllers/application_controller'
 
 RSpec.describe 'search' do
   it 'should search for articles when a user submits the topic' do
+    visit '/logout'
     visit '/register'
 
     fill_in 'user[email]', with: 'test@test.com'

@@ -19,6 +19,18 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'app/public'
   end
 
+  def protected!
+    unless logged_in
+      redirect '/'
+    end
+  end
+
+  def unprotected!
+    if logged_in
+      redirect '/'
+    end
+  end
+
   def logged_in
     if session[:user_id]
       return true
@@ -49,6 +61,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/register' do
+    unprotected!
     erb :register
   end
 
@@ -76,6 +89,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
+    unprotected!
     erb :login
   end
 
@@ -97,6 +111,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
+    protected!
     session.delete(:user_id)
     redirect '/', notice: 'User logout was successful!'
   end
@@ -122,6 +137,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/select_article' do
+    protected!
     @select_articles = JSON.parse(read_articles)
     erb :select
   end
@@ -136,6 +152,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/404' do
+    protected!
     erb :not_found
   end
 end
