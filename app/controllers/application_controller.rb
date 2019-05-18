@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'app/public'
   end
 
-  def logged_in?
+  def logged_in
     if session[:user_id]
       return true
     end
@@ -126,5 +126,17 @@ class ApplicationController < Sinatra::Base
     erb :select
   end
 
+  not_found do
+    puts logged_in
+    if logged_in
+      redirect '/404'
+    else
+      redirect '/'
+    end
+  end
+
+  get '/404' do
+    erb :not_found
+  end
 end
 
