@@ -40,6 +40,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     mustermann (1.0.3)
+    news-api (0.0.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     pg (1.1.4)
@@ -102,6 +103,7 @@ DEPENDENCIES
   capybara
   coveralls
   database_cleaner
+  news-api
   pg
   rake
   rspec
