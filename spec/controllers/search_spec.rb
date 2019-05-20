@@ -18,6 +18,6 @@ RSpec.describe 'search' do
 
     click_on 'Submit'
 
-    expect(current_path).to eq('/select_article')
+    expect(current_path).to eq('/article')
   end
 end

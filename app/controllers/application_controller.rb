@@ -37,19 +37,13 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  def current_user
-    user_id = session[:user_id]
-    user = User.find_by(id: user_id)
-    return user
-  end
-
-  def save_articles_to_select(articles)
+  def save_article(article)
     File.open('transit_storage.txt', 'w') do |file|
-      file.puts(articles)
+      file.puts(article)
     end
   end
 
-  def read_articles
+  def read_article
     File.read('transit_storage.txt')
   rescue Errno::ENOENT
     return nil
@@ -117,29 +111,27 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/search_articles' do
-    @articles = []
     topic = params['article']['topic']
 
     API_KEY = ENV['API_KEY']
     newsapi = News.new(API_KEY)
 
-    newsapi.get_everything(
+    @article = newsapi.get_everything(
         q: topic,
-        sortBy: 'relevancy').take(10).each do |article|
-      article_hash = {}
-      article_hash[:title] = article.title
-      article_hash[:description] = article.description
-      article_hash[:url] = article.url
-      @articles.push(article_hash)
-    end
-    save_articles_to_select(@articles.to_json)
-    redirect '/select_article'
+        language: 'en',
+        sortBy: 'relevancy').sample
+    save_article(@article.to_json)
+    redirect '/article'
   end
-
-  get '/select_article' do
+  
+  get '/article' do
     protected!
-    @select_articles = JSON.parse(read_articles)
-    erb :select
+    @article = JSON.parse(read_article)
+    if @article.empty?
+      redirect '/'
+    else
+      erb :select
+    end
   end
 
   not_found do
