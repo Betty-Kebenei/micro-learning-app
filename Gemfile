@@ -12,7 +12,8 @@ gem 'sinatra-activerecord'
 gem 'pg'
 gem 'sinatra-flash'
 gem 'sinatra-redirect-with-flash'
-
+gem 'bcrypt'
+gem 'news-api'
 
 group :test do
   gem 'rspec'

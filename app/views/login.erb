@@ -1,0 +1,27 @@
+<div style="padding-top:10%;">
+  <h3>Login to get started!</h3>
+
+  <div>
+    <form class="form-horizontal" method="post" action="/login_user">
+      <div class="form-group">
+        <div class="col-2 col-xm-12">
+          <label class="form-label" for="email">Email:</label>
+        </div>
+        <div class="col-8 col-xm-12">
+          <input class="form-input" type="email" name="user[email]" id="email">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-2 col-sm-12">
+          <label class="form-label" for="password">Password:</label>
+        </div>
+        <div class="col-8 col-sm-12">
+          <input class="form-input" type="password" name="user[password]" id="password">
+        </div>
+      </div>
+      <input type="submit" class="label label-primary" value="Submit">
+    </form>
+  </div>
+
+  <p>You don't have an account yet? Please register <a href="/register">here</a>. </p>
+</div>
