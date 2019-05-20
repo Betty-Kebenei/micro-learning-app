@@ -1,19 +1,26 @@
 <div class="home">
   <h1>Welcome to Micro-Learning Application</h1>
   <% if @current_user %>
-    <p>Kindly help us know what you want to learn today!</p>
-    <form method="post" action="/search_articles">
-      <fieldset>
-        <label for="search">Topic:</label>
-        <input
-          type="text"
-          name="article[topic]"
-          id="search"
-          size="100"
-          placeholder="introduction to programming">
-      </fieldset>
-      <input type="submit" value="Submit">
-    </form>
+    <% if @read %>
+      <p>Thank you for choosing to learning something through this application today!</p>
+      <p>See you tomorrow for another read!</p>
+      <p>Want to re-read today's article?</p>
+      <p>Find it <a href="/article">here</a></p>
+    <% else %>
+      <p>Kindly help us know what you want to learn today!</p>
+      <form method="post" action="/search_articles">
+        <fieldset>
+          <label for="search">Topic:</label>
+          <input
+            type="text"
+            name="article[topic]"
+            id="search"
+            size="100"
+            placeholder="introduction to programming">
+        </fieldset>
+        <input type="submit" value="Submit">
+      </form>
+    <% end %>
   <% else %>
     <div class="introduction">
       <p> It is an application that sends you one page per day about something you want to learn.</p>

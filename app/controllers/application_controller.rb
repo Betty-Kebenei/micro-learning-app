@@ -6,8 +6,10 @@ require './config/environments'
 require 'uri'
 require 'news-api'
 require 'json'
+require 'date'
 
 require_relative '../../app/models/user'
+require_relative '../../app/models/article'
 
 class ApplicationController < Sinatra::Base
   use Rack::Session::Cookie
@@ -51,6 +53,11 @@ class ApplicationController < Sinatra::Base
 
   get '/' do
     @current_user = session[:user_id]
+    read_article = Article.find_by(
+        user_id: @current_user, updated_at: Date.today)
+    if read_article
+      @read = true
+    end
     erb :home
   end
 
@@ -130,6 +137,10 @@ class ApplicationController < Sinatra::Base
     if @article.empty?
       redirect '/'
     else
+      article = Article.new(
+          url: @article.fetch('url'),
+          user_id: session[:user_id])
+      article.save
       erb :select
     end
   end
