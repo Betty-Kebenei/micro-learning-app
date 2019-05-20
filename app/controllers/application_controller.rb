@@ -40,6 +40,9 @@ class ApplicationController < Sinatra::Base
   end
 
   def save_article(article)
+    if File.file?('transit_storage.txt')
+      File.delete('transit_storage.txt')
+    end
     File.open('transit_storage.txt', 'w') do |file|
       file.puts(article)
     end
@@ -133,6 +136,7 @@ class ApplicationController < Sinatra::Base
   
   get '/article' do
     protected!
+    @current_user = session[:user_id]
     @article = JSON.parse(read_article)
     if @article.empty?
       redirect '/'
