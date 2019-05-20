@@ -1,5 +1,5 @@
-<div class="home">
-  <h1>Welcome to Micro-Learning Application</h1>
+<div class="home" style="padding-top:10%;">
+  <h2>Welcome to Micro-Learning Application</h2>
   <% if @current_user %>
     <% if @read %>
       <p>Thank you for choosing to learning something through this application today!</p>
@@ -8,17 +8,22 @@
       <p>Find it <a href="/article">here</a></p>
     <% else %>
       <p>Kindly help us know what you want to learn today!</p>
-      <form method="post" action="/search_articles">
-        <fieldset>
-          <label for="search">Topic:</label>
-          <input
-            type="text"
-            name="article[topic]"
-            id="search"
-            size="100"
-            placeholder="introduction to programming">
-        </fieldset>
-        <input type="submit" value="Submit">
+      <form class="form-horizontal" method="post" action="/search_articles">
+        <div class="form-group">
+          <div class="col-2 col-xm-12">
+            <label class="form-label" for="search">Topic:</label>
+          </div>
+          <div class="col-8 col-xm-12">
+            <input
+              class="form-input"
+              type="text"
+              name="article[topic]"
+              id="search"
+              size="100"
+              placeholder="introduction to programming">
+          </div>
+        </div>
+        <input type="submit" class="label label-primary" value="Submit">
       </form>
     <% end %>
   <% else %>
@@ -36,4 +41,3 @@
     </div>
   <% end %>
 </div>
-

@@ -1,19 +1,36 @@
-<h2>Register to get started!</h2>
+<div style="padding-top:10%;">
+  <h3>Register to get started!</h3>
 
-<div>
-  <form method="post" action="/create_user">
-    <fieldset>
-      <label for="email">Email:</label>
-      <input type="email" name="user[email]" id="email">
-    </fieldset>
-    <fieldset>
-      <label for="password">Password:</label>
-      <input type="password" name="user[password]" id="password">
-    </fieldset>
-    <fieldset>
-      <label for="con_password">Confirm Password:</label>
-      <input type="password" name="user[con_password]" id="con_password">
-    </fieldset>
-    <input type="submit" value="Submit">
-  </form>
+  <div>
+    <form class="form-horizontal" method="post" action="/create_user">
+      <div class="form-group">
+        <div class="col-2 col-xm-12">
+          <label class="form-label" for="email">Email:</label>
+        </div>
+        <div class="col-8 col-xm-12">
+          <input class="form-input" type="email" name="user[email]" id="email">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-2 col-sm-12">
+          <label class="form-label" for="password">Password:</label>
+        </div>
+        <div class="col-8 col-sm-12">
+          <input class="form-input" type="password" name="user[password]" id="password">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-2 col-sm-12">
+          <label class="form-label" for="con_password">Confirm Password:</label>
+        </div>
+        <div class="col-8 col-sm-12">
+          <input class="form-input" type="password" name="user[con_password]" id="con_password">
+        </div>
+      </div>
+      <input type="submit" class="label label-primary" value="Submit">
+    </form>
+  </div>
+
+  <p>Already have an account? Please login <a href="/login">here.</a></p>
 </div>
+
