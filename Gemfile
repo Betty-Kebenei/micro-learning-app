@@ -14,6 +14,7 @@ gem 'sinatra-flash'
 gem 'sinatra-redirect-with-flash'
 gem 'bcrypt'
 gem 'news-api'
+gem 'httparty'
 
 group :test do
   gem 'rspec'

@@ -1,0 +1,74 @@
+.navbar {
+    box-shadow:1px 1px 8px #888888;
+}
+
+.navbar-section-left {
+    position: relative;
+    right: -10%;
+}
+
+.navbar-section-left img {
+    height:10vh;
+    width:30vw;
+}
+
+.navbar-section-right {
+    position: relative;
+    left: -20%;
+}
+
+.navbar-section-right a {
+    text-decoration: none;
+    position: absolute;
+    top: 40%
+}
+
+#flash {
+    text-align: center;
+    width: 60%;
+    margin: auto;
+    line-height: 50px;
+}
+
+#flash .notice {
+    background-color: #32CD32;
+}
+
+#flash .error {
+    background-color: #Ff4500;
+}
+
+.content {
+    width:80vw;
+    margin: auto;
+    text-align: center;
+}
+
+.home, .login, .not-found, .register {
+    padding-top:10%;
+}
+
+.not-found h2 {
+    font-size:3rem;
+}
+
+.not-found p:first-of-type {
+    font-size:8rem;
+    color:deepskyblue;
+}
+
+.not-found a button {
+    border-radius: 2%;
+    color: white;
+    background-color: orange;
+}
+
+.article {
+    padding-top:0%;
+}
+
+.article iframe {
+    height:80vh;
+    width:70vw;
+}
+

@@ -5,24 +5,33 @@
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <script type="text/javascript">
+        function showFlash() {
+            document.getElementById("flash").remove();
+        }
+        setTimeout("showFlash()", 2000);
+    </script>
   </head>
   <body>
-    <header class="navbar"  style="box-shadow:1px 1px 8px #888888;">
-      <section class="navbar-section" style="position: relative; right: -10%;">
-        <a href="/"><img src="images/logo.png" alt="logo" style="height:10vh; width:30vw;"></a>
+    <header class="navbar">
+      <section class="navbar-section-left">
+        <a href="/"><img src="images/logo.png" alt="logo"></a>
       </section>
-      <section class="navbar-section" style="position: relative; left: -10%;">
+      <section class="navbar-section-right">
         <% if @current_user %>
-          <a href="/logout" style="text-decoration: none;">Logout</a>
+          <a href="/logout">Logout</a>
         <% end %>
       </section>
     </header>
-    <% if flash[:notice] %>
-      <p><%= flash[:notice] %></p>
-    <% elsif flash[:error] %>
-      <p><%= flash[:error] %></p>
-    <% end %>
-    <div class="content" style="width:80vw; margin: auto; text-align: center;" >
+    <div id="flash">
+      <% if flash[:notice] %>
+        <p class='flash notice'><%= flash[:notice] %></p>
+      <% elsif flash[:error] %>
+        <p class='flash error'><%= flash[:error] %></p>
+      <% end %>
+    </div>
+    <div class="content">
       <%= yield %>
     </div>
   </body>

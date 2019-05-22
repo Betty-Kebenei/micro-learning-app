@@ -7,6 +7,7 @@ require 'uri'
 require 'news-api'
 require 'json'
 require 'date'
+require 'httparty'
 
 require_relative '../../app/models/user'
 require_relative '../../app/models/article'
@@ -40,16 +41,18 @@ class ApplicationController < Sinatra::Base
   end
 
   def save_article(article)
-    if File.file?('transit_storage.txt')
-      File.delete('transit_storage.txt')
+    user_id = session[:user_id]
+    if File.file?("#{user_id}.txt")
+      File.delete("#{user_id}.txt")
     end
-    File.open('transit_storage.txt', 'w') do |file|
+    File.open("#{user_id}.txt", 'w') do |file|
       file.puts(article)
     end
   end
 
   def read_article
-    File.read('transit_storage.txt')
+    user_id = session[:user_id]
+    File.read("#{user_id}.txt")
   rescue Errno::ENOENT
     return nil
   end
@@ -126,10 +129,17 @@ class ApplicationController < Sinatra::Base
     API_KEY = ENV['API_KEY']
     newsapi = News.new(API_KEY)
 
-    @article = newsapi.get_everything(
-        q: topic,
-        language: 'en',
-        sortBy: 'relevancy').sample
+    x_frame_option = true
+   while x_frame_option do
+     @article = newsapi.get_everything(q: topic, language: 'en', sortBy: 'relevancy').sample
+     url = JSON.parse(@article.to_json).fetch('url')
+     frame = HTTParty.get(url).headers['X-Frame-Options']
+     if frame == 'DENY' || frame == 'SAMEORIGIN' || frame == 'ALLOW-FROM'
+       x_frame_option = true
+     else
+       x_frame_option = false
+     end
+   end
     save_article(@article.to_json)
     redirect '/article'
   end
